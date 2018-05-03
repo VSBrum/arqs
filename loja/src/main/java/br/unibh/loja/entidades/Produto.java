@@ -12,6 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 
@@ -21,24 +27,39 @@ public class Produto {
 
 	@Version
 	private Long version;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
+	@Size(max = 100)
+	@Pattern(regexp = "[A-zÀ-ú .']*",
+			message = "Nome tem caracteres invalidos")
 	@Column(length = 100, nullable = false)
 	private String nome;
 
+	@NotBlank
+	@Size(max = 4000)
+	@Pattern(regexp = "[A-zÀ-ú .'-/]*",
+			message = "descriçao tem caracteres invalidos")
 	@Column(length = 4000, nullable = false)
 	private String descricao;
 
+	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria", referencedColumnName = "id")
 	private Categoria categoria;
 
+	@NotNull
+	@Min(value = 0, message = "o preço deve ser um valor positivo")
 	@Column(precision = 14, scale = 2, nullable = false)
 	private BigDecimal preco;
 
+	@NotBlank
+	@Size(min = 5, max = 100)
+	@Pattern(regexp = "[A-zÀ-ú .']*",
+			message = "Fabricante tem caracteres invalidos")
 	@Column(length = 100, nullable = false)
 	private String fabricante;
 

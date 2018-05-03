@@ -13,9 +13,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 
@@ -28,45 +37,65 @@ import javax.persistence.UniqueConstraint;
 public class Cliente {
 
 	@Id
-
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank
+	@Size(min = 5, max = 100)
+	@Pattern(regexp = "[A-zÀ-ú .']*",
 
+			message = "Nome tem caracteres invalidos")
 	@Column(length = 100, nullable = false)
-
 	private String nome;
 
-	@Column(length = 15, nullable = false)
+	@NotBlank
+	@Size(min = 8, max = 15)
+	@Pattern(regexp = "[A-z0-9]*",
 
+			message = "contem caracteres invalidos")
+	@Column(length = 15, nullable = false)
 	private String login;
 
+	@NotBlank
+	@Size(max = 100)
 	@Column(length = 100, nullable = false)
-
 	private String senha;
 
-	@Column(length = 100, nullable = false)
+	@NotBlank
+	@Size(max = 100)
+	@Pattern(regexp = "[A-zÀ-ú ]*",
 
+			message = "contem caracteres invalidos")
+	@Column(length = 100, nullable = false)
 	private String perfil;
 
-	@Column(length = 11, nullable = false)
+	@Version
+	private Long version;
 
+	@CPF
+	@Column(length = 11, nullable = false)
 	private String cpf;
 
-	@Column(length = 14, nullable = true)
+	@NotBlank
+	@Pattern(regexp = "\\(\\d{2}\\)\\d{4}-\\d{4}",
 
+			message = "telefone invalido")
+	@Column(length = 14, nullable = true)
 	private String telefone;
 
+	@Email
 	@Column(length = 100, nullable = true)
-
 	private String email;
 
+	@NotNull
+	@Past
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento", nullable = false)
-
 	private Date dataNascimento;
 
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_cadastro", nullable = false)
-
 	private Date dataCadastro;
 
 	/*
