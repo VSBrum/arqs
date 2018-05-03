@@ -2,15 +2,78 @@ package br.unibh.loja.entidades;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
+import javax.persistence.Entity;
+
+import javax.persistence.GeneratedValue;
+
+import javax.persistence.GenerationType;
+
+import javax.persistence.Id;
+
+import javax.persistence.Table;
+
+import javax.persistence.UniqueConstraint;
+
+
+@Entity
+
+@Table(name = "tb_cliente", uniqueConstraints = {
+
+		@UniqueConstraint(columnNames = { "cpf" }), @UniqueConstraint(columnNames = { "login" })
+
+})
+
 public class Cliente {
 
+	@Id
+
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
 	private Long id;
+
+	@Column(length = 100, nullable = false)
+
 	private String nome;
+
+	@Column(length = 15, nullable = false)
+
 	private String login;
+
+	@Column(length = 100, nullable = false)
+
 	private String senha;
+
+	@Column(length = 100, nullable = false)
+
 	private String perfil;
+
+	@Column(length = 11, nullable = false)
+
 	private String cpf;
+
+	@Column(length = 14, nullable = true)
+
 	private String telefone;
+
+	@Column(length = 100, nullable = true)
+
+	private String email;
+
+	@Column(name = "data_nascimento", nullable = false)
+
+	private Date dataNascimento;
+
+	@Column(name = "data_cadastro", nullable = false)
+
+	private Date dataCadastro;
+
+	/*
+	 * private Long id; private String nome; private String login; private String
+	 * senha; private String perfil; private String cpf; private String telefone;
+	 * private Long version;
+	 */
 
 	public Cliente() {
 		super();
@@ -30,10 +93,6 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 		this.dataCadastro = dataCadastro;
 	}
-
-	private String email;
-	private Date dataNascimento;
-	private Date dataCadastro;
 
 	public Long getId() {
 		return id;

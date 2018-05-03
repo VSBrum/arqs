@@ -9,7 +9,7 @@ import org.junit.Test;
 import br.unibh.loja.entidades.Categoria;
 
 public class testeCategoria {
-
+	
 	@Test
 
 	public void testCreateObject() {

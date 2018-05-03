@@ -10,7 +10,7 @@ import org.junit.Test;
 import br.unibh.loja.entidades.Cliente;
 
 public class testeCliente {
-
+	
 	@Test
 
 	public void testCreateObject() {
