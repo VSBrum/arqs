@@ -14,7 +14,7 @@ public class testeCliente {
 
 	public void testCreateObject() {
 
-		Cliente c = new Cliente(1L, "Vinicius", "vinicim", "senha", "vinici", "11111111111", "11 1 11111111",
+		Cliente c = new Cliente(1L, "Vinicius", "vinicim1997", "senha", "vinic", "12876581647", "(11)9811-1111",
 
 				"vinicim1997@gmail.com", new Date(), new Date());
 
@@ -26,11 +26,11 @@ public class testeCliente {
 
 		assertEquals(c.getSenha(), "senha");
 
-		assertEquals(c.getPerfil(), "vinici");
+		assertEquals(c.getPerfil(), "vinic");
 
-		assertEquals(c.getCpf(), "11111111111");
+		assertEquals(c.getCpf(), "12876581647");
 
-		assertEquals(c.getTelefone(), "11 1 11111111");
+		assertEquals(c.getTelefone(), "(11)9811-1111");
 
 		assertEquals(c.getEmail(), "vinicim1997@gmail.com");
 

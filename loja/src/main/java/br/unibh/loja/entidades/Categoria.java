@@ -1,6 +1,5 @@
 package br.unibh.loja.entidades;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
@@ -18,7 +19,17 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 
-@Table(name = "tb_categoria", uniqueConstraints = { @UniqueConstraint(columnNames = { "descricao" }) })
+@Table(name = "tb_Categoria", uniqueConstraints = {
+
+		@UniqueConstraint(columnNames = { "descricao" })
+
+})
+
+@NamedQueries({
+
+		@NamedQuery(name = "Categoria.findByName", query = "select o from Categoria o where o.descricao like :descricao")
+
+})
 
 public class Categoria {
 
@@ -30,9 +41,8 @@ public class Categoria {
 	private Long id;
 
 	@NotBlank
-	@Size (max=100)
-	@Pattern (regexp="[A-zÀ-ú .'-/]*",
-	message="descriçao tem caracteres invalidos")
+	@Size(max = 100)
+	@Pattern(regexp = "[A-zÀ-ú .'-/]*", message = "descriçao tem caracteres invalidos")
 	@Column(length = 100, nullable = false)
 	private String descricao;
 

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
@@ -23,6 +25,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Table(name = "tb_produto", uniqueConstraints = { @UniqueConstraint(columnNames = { "nome" }) })
 
+@NamedQueries({
+
+		@NamedQuery(name = "Produto.findByName", query = "select o from Produto o where o.nome like :nome")
+
+})
+
 public class Produto {
 
 	@Version
@@ -34,15 +42,13 @@ public class Produto {
 
 	@NotBlank
 	@Size(max = 100)
-	@Pattern(regexp = "[A-zÀ-ú .']*",
-			message = "Nome tem caracteres invalidos")
+	@Pattern(regexp = "[A-zÀ-ú .']*", message = "Nome tem caracteres invalidos")
 	@Column(length = 100, nullable = false)
 	private String nome;
 
 	@NotBlank
 	@Size(max = 4000)
-	@Pattern(regexp = "[A-zÀ-ú .'-/]*",
-			message = "descriçao tem caracteres invalidos")
+	@Pattern(regexp = "[A-zÀ-ú .'-/]*", message = "descriçao tem caracteres invalidos")
 	@Column(length = 4000, nullable = false)
 	private String descricao;
 
@@ -58,8 +64,7 @@ public class Produto {
 
 	@NotBlank
 	@Size(min = 5, max = 100)
-	@Pattern(regexp = "[A-zÀ-ú .']*",
-			message = "Fabricante tem caracteres invalidos")
+	@Pattern(regexp = "[A-zÀ-ú .']*", message = "Fabricante tem caracteres invalidos")
 	@Column(length = 100, nullable = false)
 	private String fabricante;
 

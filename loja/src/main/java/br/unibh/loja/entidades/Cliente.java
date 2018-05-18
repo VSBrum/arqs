@@ -11,7 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import javax.persistence.Id;
-
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,13 +34,18 @@ import org.hibernate.validator.constraints.br.CPF;
 		@UniqueConstraint(columnNames = { "cpf" }), @UniqueConstraint(columnNames = { "login" })
 
 })
+@NamedQueries({
+
+		@NamedQuery(name = "Cliente.findByName", query = "select o from Cliente o where o.nome like :nome")
+
+})
 
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Size(min = 5, max = 100)
 	@Pattern(regexp = "[A-zÀ-ú .']*",
@@ -97,12 +103,6 @@ public class Cliente {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_cadastro", nullable = false)
 	private Date dataCadastro;
-
-	/*
-	 * private Long id; private String nome; private String login; private String
-	 * senha; private String perfil; private String cpf; private String telefone;
-	 * private Long version;
-	 */
 
 	public Cliente() {
 		super();
