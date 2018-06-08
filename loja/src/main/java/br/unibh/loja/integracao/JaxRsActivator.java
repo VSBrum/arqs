@@ -26,14 +26,14 @@ public class JaxRsActivator extends Application {
 
 	}
 
-
-
 	@Override
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> resources = new HashSet();
-		// classes do swagger resources.add(ApiListingResource.class);
+		// classes do swagger 
+		resources.add(ApiListingResource.class);
 		resources.add(SwaggerSerializers.class);
-		// classes da aplicacao resources.add(JaxRsActivator.class);
+		// classes da aplicacao 
+		resources.add(JaxRsActivator.class);
 		resources.add(RestTest.class);
 		resources.add(RestCliente.class);
 		return resources;
